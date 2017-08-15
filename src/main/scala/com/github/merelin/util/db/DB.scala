@@ -1,6 +1,6 @@
 package com.github.merelin.util.db
 
-import java.sql.{Connection, ResultSet, Statement}
+import java.sql.{Connection, PreparedStatement, ResultSet, Statement}
 import javax.sql.DataSource
 
 sealed trait DBType {
@@ -40,13 +40,31 @@ case class DBParams(name: String, url: String, username: String, password: Strin
 }
 
 case class DB(params: DBParams, datasource: DataSource, dbType: DBType) {
-  def withConnection[A](fn: (Connection) => A): A = fn(datasource.getConnection)
+  def withConnection[A](fn: (Connection) => A): A = {
+    val connection = datasource.getConnection
+    try {
+      val result = fn(connection)
+      connection.commit()
+      result
+    } catch {
+      case th: Throwable =>
+        connection.rollback()
+        throw th
+    }
+  }
+
   def withStatement[A](st: Statement)(fn: (Statement) => A): A = try { fn(st) } finally { st.close() }
+
   def withResultSet[A](rs: ResultSet)(fn: (ResultSet) => A): A = try { fn(rs) } finally { rs.close() }
+
+  def tableExists(connection: Connection, table: String): Boolean =
+    withResultSet[Boolean](connection.getMetaData.getTables(null, null, table.toUpperCase, null)) { rs => rs.next() }
+
+  def createTable(connection: Connection, sql: String): Unit =
+    withStatement[Boolean](connection.prepareStatement(sql)) { st => st.asInstanceOf[PreparedStatement].execute() }
 }
 
 object DB {
-  def apply(params: DBParams): DB = new DB(
-    params = params, datasource = DataSourceFactory.datasource(params), dbType = DBType.fromParams(params)
-  )
+  def apply(params: DBParams): DB =
+    new DB(params = params, datasource = DataSourceFactory.datasource(params), dbType = DBType.fromParams(params))
 }

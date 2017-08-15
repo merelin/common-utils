@@ -17,5 +17,6 @@ libraryDependencies ++= Seq(
   "com.h2database" % "h2" % "1.4.193",
   "com.zaxxer" % "HikariCP" % "2.6.3",
   "org.slf4j" % "slf4j-api" % "1.7.25",
-  "ch.qos.logback" % "logback-classic" % "1.2.3"
+  "ch.qos.logback" % "logback-classic" % "1.2.3",
+  "com.ibm.icu" % "icu4j" % "59.1"
 )
