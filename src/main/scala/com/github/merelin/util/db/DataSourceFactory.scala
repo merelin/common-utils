@@ -1,17 +1,10 @@
 package com.github.merelin.util.db
 
-import java.sql.DriverManager
 import java.util.concurrent.TimeUnit._
 
 import com.zaxxer.hikari.HikariDataSource
 
 object DataSourceFactory {
-  List(
-//    new oracle.jdbc.driver.OracleDriver(),
-//    new net.sourceforge.jtds.jdbc.Driver(),
-    new org.h2.Driver()
-  ).foreach(DriverManager.registerDriver)
-
   val lock = new Object
   var datasources = Map.empty[DBParams, HikariDataSource]
 
