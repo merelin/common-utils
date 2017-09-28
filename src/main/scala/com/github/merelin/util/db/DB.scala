@@ -50,12 +50,15 @@ case class DB(params: DBParams, datasource: DataSource, dbType: DBType) {
       case th: Throwable =>
         connection.rollback()
         throw th
+    } finally {
+      if (connection != null)
+        connection.close()
     }
   }
 
-  def withStatement[A](st: Statement)(fn: (Statement) => A): A = try { fn(st) } finally { st.close() }
+  def withStatement[A](st: Statement)(fn: (Statement) => A): A = try { fn(st) } finally { if (st != null) st.close() }
 
-  def withResultSet[A](rs: ResultSet)(fn: (ResultSet) => A): A = try { fn(rs) } finally { rs.close() }
+  def withResultSet[A](rs: ResultSet)(fn: (ResultSet) => A): A = try { fn(rs) } finally { if (rs != null) rs.close() }
 
   def tableExists(connection: Connection, table: String): Boolean =
     withResultSet[Boolean](connection.getMetaData.getTables(null, null, table.toUpperCase, null)) { rs => rs.next() }
