@@ -17,7 +17,7 @@ trait CbrRatesAware {
 
   val cbrRatesStartDate = "01.07.1992"
 
-  val dir = "/media/disk3/Nextcloud/Development/Finance/Doc"
+  val dir = "/media/disk3/Nextcloud/Development/common-utils/CommonUtils/resources/Doc"
 
   def localReportDates: List[Date] = {
     new File(dir).listFiles().filter(_.isDirectory).toList.flatMap(_.listFiles().filter(_.isFile).toList).map(
@@ -86,8 +86,11 @@ class CbrRatesFetcher extends CbrRatesAware {
     val startDate = parseDate(fromDay)
     val endDate = parseDate(toDay)
 
+    println(s"Fetching range: ${fromDay}-${toDay}")
+
     var observationDate = startDate
     while (observationDate.getTime <= endDate.getTime) {
+      println(s"Fetching date: ${observationDate}")
       val str = fetch(observationDate)
       saveLocalReport(observationDate, str)
       Thread.sleep(pause)
