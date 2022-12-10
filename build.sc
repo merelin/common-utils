@@ -1,10 +1,12 @@
-import mill._, scalalib._
+import mill._
+import mill.define._
+import scalalib._
 
 object CommonUtils extends ScalaModule {
 
   def scalaVersion = "3.2.1"
 
-  def ivyDeps = Agg(
+  override def ivyDeps = Agg(
     ivy"org.scala-lang.modules::scala-xml:2.1.0",
     ivy"org.json4s::json4s-ast:4.0.6",
     ivy"org.json4s::json4s-core:4.0.6",
@@ -22,11 +24,11 @@ object CommonUtils extends ScalaModule {
   )
 
   object test extends Tests {
-    def ivyDeps = Agg(
+    override def ivyDeps = Agg(
       ivy"org.scalactic::scalactic:3.2.14",
       ivy"org.scalatest::scalatest:3.2.14"
     )
 
-    def testFrameworks = Seq("org.scalatest.tools.Framework")
+    override def testFramework: Target[String] = "org.scalatest.tools.Framework"
   }
 }
