@@ -90,7 +90,7 @@ class CbrRatesFetcher extends CbrRatesAware {
 
     var observationDate = startDate
     while (observationDate.getTime <= endDate.getTime) {
-      println(s"Fetching date: ${observationDate}")
+      println(s"Fetching date: ${formatDate(observationDate)}")
       val str = fetch(observationDate)
       saveLocalReport(observationDate, str)
       Thread.sleep(pause)
