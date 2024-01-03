@@ -1,10 +1,10 @@
 package com.github.merelin.util.finance.cbr
 
-import java.sql.{Date as SQLDate}
-import java.sql.*
+import java.sql.{Date => SQLDate}
+import java.sql._
 import java.util.Date
-import com.github.merelin.util.db.*
-import com.github.merelin.util.time.Time.*
+import com.github.merelin.util.db._
+import com.github.merelin.util.time.Time._
 
 import java.util.Calendar
 

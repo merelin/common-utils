@@ -1,6 +1,6 @@
 package com.github.merelin.util.finance.cbr
 
-import com.github.merelin.util.json.JsonConverter.*
+import com.github.merelin.util.json.JsonConverter._
 import org.json4s.StringInput
 
 import java.util.Date

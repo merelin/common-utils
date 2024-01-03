@@ -2,8 +2,8 @@ package com.github.merelin.util.finance.cbr
 
 import java.io.{File, FileWriter}
 import java.util.{Calendar, Date}
-import com.github.merelin.util.db.*
-import com.github.merelin.util.time.Time.*
+import com.github.merelin.util.db._
+import com.github.merelin.util.time.Time._
 
 import java.text.SimpleDateFormat
 import scala.io.{Codec, Source}
@@ -17,7 +17,7 @@ trait CbrRatesAware {
 
   val cbrRatesStartDate = "01.07.1992"
 
-  val dir = "/media/disk3/Nextcloud/Development/common-utils/CommonUtils/resources/Doc"
+  val dir = s"${new File("").getAbsolutePath}/CommonUtils/resources/Doc"
 
   def localReportDates: List[Date] = {
     new File(dir).listFiles().filter(_.isDirectory).toList.flatMap(_.listFiles().filter(_.isFile).toList).map(

@@ -1,13 +1,13 @@
 package com.github.merelin.util.finance.cbr
 
 import com.github.merelin.util.db.{Db, DbParams}
-import com.github.merelin.util.finance.*
-import com.github.merelin.util.json.JsonConverter.*
+import com.github.merelin.util.finance._
+import com.github.merelin.util.json.JsonConverter._
 import com.github.merelin.util.region.Currency
-import com.github.merelin.util.time.Time.*
+import com.github.merelin.util.time.Time._
 import org.json4s.StringInput
 
-import java.sql.{Connection, PreparedStatement, Date as SQLDate}
+import java.sql.{Connection, PreparedStatement, Date => SQLDate}
 import java.util.{Calendar, Date}
 import scala.io.{Codec, Source}
 
