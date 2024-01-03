@@ -2,9 +2,9 @@ package com.github.merelin.util.json
 
 import java.io.Writer
 
-import org.json4s.*
-import org.json4s.native.JsonMethods.*
-import org.json4s.native.Serialization.*
+import org.json4s._
+import org.json4s.native.JsonMethods._
+import org.json4s.native.Serialization._
 
 import scala.xml.{NodeSeq, XML}
 
@@ -14,9 +14,9 @@ object JsonConverter {
   def toJson(s: String): JValue = parse(s)
   def fromJson(json: JValue): String = compact(render(json))
 
-  def writeTo[A <: AnyRef](a: A)(implicit formats: Formats): String = write(a)
-  def writeTo[A <: AnyRef, W <: Writer](a: A, w: W)(implicit formats: Formats): W = write(a, w)
-  def readFrom[A <: AnyRef](jsonInput: JsonInput)(implicit formats: Formats, manifest: Manifest[A]): A = read(jsonInput)
+  def writeTo[A <: AnyRef](a: A)/*(implicit formats: Formats)*/: String = write(a)
+  def writeTo[A <: AnyRef, W <: Writer](a: A, w: W)/*(implicit formats: Formats)*/: W = write(a, w)
+  def readFrom[A <: AnyRef](jsonInput: JsonInput)(implicit /*formats: Formats,*/ manifest: Manifest[A]): A = read(jsonInput)
 
   def xmlToJson(xml: NodeSeq): JValue = Xml.toJson(xml)
   def xmlStringToJson(s: String): JValue = xmlToJson(XML.loadString(s))

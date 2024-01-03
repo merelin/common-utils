@@ -1,6 +1,6 @@
 package com.github.merelin.util.db
 
-import java.util.concurrent.TimeUnit.*
+import java.util.concurrent.TimeUnit._
 
 import com.zaxxer.hikari.HikariDataSource
 

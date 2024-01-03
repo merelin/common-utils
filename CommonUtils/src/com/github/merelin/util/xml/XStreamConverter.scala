@@ -2,13 +2,13 @@ package com.github.merelin.util.xml
 
 import java.lang.reflect.{Constructor => JConstructor}
 
-import com.thoughtworks.xstream.*
-import com.thoughtworks.xstream.converters.*
-import com.thoughtworks.xstream.converters.collections.*
-import com.thoughtworks.xstream.converters.extended.*
-import com.thoughtworks.xstream.io.*
+import com.thoughtworks.xstream._
+import com.thoughtworks.xstream.converters._
+import com.thoughtworks.xstream.converters.collections._
+import com.thoughtworks.xstream.converters.extended._
+import com.thoughtworks.xstream.io._
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver
-import com.thoughtworks.xstream.mapper.*
+import com.thoughtworks.xstream.mapper._
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.reflect.ClassTag
